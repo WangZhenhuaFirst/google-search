@@ -17,49 +17,26 @@
 
   <% if @results && !@results.items.empty? %>
     <div class='container'>
-      <% @results.items.each do |item| %>
-        <div class='row'>
-          <h4><%= link_to item.htmlTitle.html_safe, item.link %></h4>
-          <div>
-            <% if item['pagemap'] &&
-                  item['pagemap']['cse_thumbnail'] &&
-                  img = item.pagemap.cse_thumbnail.first %>
-              <div class='col-sm-2'>
-                <%= image_tag(img.src, width: '200px') %>
-              </div>
-              <div class='col-sm-10'>
-                <%= item.htmlSnippet.html_safe %>
-              </div>
-            <% else %>
-              <%= item.htmlSnippet.html_safe %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <h6 style="margin:20px 0 30px 40px"> 共<%= @results.count %>条记录，前三条记录为:</h6>
+
+        <ul style="list-style-type:none">
+          <li>
+            <h6><%=  @results.items.first.htmlTitle.html_safe %></h6>
+            <p><%= link_to @results.items.first.link %> </p>
+          </li>
+          <li>
+            <h6><%=  @results.items.second.htmlTitle.html_safe %></h6>
+            <p><%= link_to @results.items.second.link %> </p>
+          </li>
+          <li>
+            <h6><%=  @results.items.third.htmlTitle.html_safe %></h6>
+            <p><%= link_to @results.items.third.link %> </p>
+          </li>
+        </ul>
     </div>
 
-    <div class='container search-prev-next'>
-      <div class='row text-center'>
-        <% if @results.previous_page %>
-          <%= link_to '<< Previous',
-            search_path(q: params[:q], page: @results.previous_page),
-            class: 'btn' %>
-        <% end %>
-        <% @results.pages.times do |i| %>
-          <%= link_to i + 1,
-            search_path(q: params[:q], page: i+1),
-            class: 'btn btn-page' %>
-        <% end %>
-        <% if @results.next_page %>
-          <%= link_to 'Next >>',
-            search_path(q: params[:q],
-                        page: @results.next_page),
-            class: 'btn' %>
-        <% end %>
-      </div>
-    </div>
   <% else %>
-    <h4>No results</h4>
+    <h6 style="margin:20px 0 30px 40px">No results</h6>
   <% end %>
 
 
