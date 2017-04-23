@@ -15,14 +15,15 @@
 
 
 
-  <% if @results && !@results.items.empty? %>
+   <% if @results && !@results.items.empty? %>
     <div class='container'>
-        <h6 style="margin:20px 0 30px 40px"> 共<%= @results.count %>条记录，前三条记录为:</h6>
+        <h6 style="margin:20px 0 30px 40px"> 共<%= @results["queries"]["request"][0]["totalResults"] %>条记录，前三条记录为:</h6>
+
 
         <ul style="list-style-type:none">
           <li>
-            <h6><%=  @results.items.first.htmlTitle.html_safe %></h6>
-            <p><%= link_to @results.items.first.link %> </p>
+            <h6><%=  @results.items.first.title %></h6>
+            <p><%= link_to @results.items.first.link %></p>
           </li>
           <li>
             <h6><%=  @results.items.second.htmlTitle.html_safe %></h6>
@@ -34,10 +35,9 @@
           </li>
         </ul>
     </div>
-
-  <% else %>
-    <h6 style="margin:20px 0 30px 40px">No results</h6>
-  <% end %>
+   <% else %>
+     <h6 style="margin:20px 0 30px 40px">No results</h6>
+   <% end %>
 
 
 </section>
